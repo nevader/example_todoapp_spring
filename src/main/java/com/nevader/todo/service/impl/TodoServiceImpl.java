@@ -6,6 +6,7 @@ import com.nevader.todo.exceptions.customExceptions.ResourceNotFoundException;
 import com.nevader.todo.mapper.TodoMapper;
 import com.nevader.todo.repository.TodoRepository;
 import com.nevader.todo.service.TodoService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    @Transactional
     public void deleteTodoById(Long id) {
 
         Todo todo = todoRepository.findById(id).orElseThrow(
