@@ -2,7 +2,7 @@ package com.nevader.todo.service.impl;
 
 import com.nevader.todo.dto.TodoDto;
 import com.nevader.todo.entity.Todo;
-import com.nevader.todo.exceptions.ResourceNotFoundException;
+import com.nevader.todo.exceptions.customExceptions.ResourceNotFoundException;
 import com.nevader.todo.mapper.TodoMapper;
 import com.nevader.todo.repository.TodoRepository;
 import com.nevader.todo.service.TodoService;

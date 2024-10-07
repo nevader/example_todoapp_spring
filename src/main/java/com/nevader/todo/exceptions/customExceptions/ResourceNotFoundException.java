@@ -1,10 +1,10 @@
-package com.nevader.todo.exceptions;
+package com.nevader.todo.exceptions.customExceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
 
     private final String resourceName;
     private final String fieldName;
@@ -16,6 +16,4 @@ public class ResourceNotFoundException extends RuntimeException{
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
-
-
 }

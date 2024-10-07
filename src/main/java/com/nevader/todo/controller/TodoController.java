@@ -5,9 +5,11 @@ import com.nevader.todo.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,13 +38,20 @@ public class TodoController {
     @ApiResponse(responseCode = "404", description = "Resource not found")
 
     @PostMapping
-    public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto todoDto) {
+    public ResponseEntity<?> addTodo(@Valid @RequestBody TodoDto todoDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+
+            StringBuilder errorMessage = new StringBuilder();
+            bindingResult.getAllErrors().forEach(error -> errorMessage.append(error.getDefaultMessage()).append("\n"));
+            return new ResponseEntity<>(errorMessage.toString(), HttpStatus.BAD_REQUEST);
+
+        }
 
         TodoDto savedTodo = todoService.addTodo(todoDto);
-
         return new ResponseEntity<>(savedTodo, HttpStatus.CREATED);
-    }
 
+    }
 
 
     @Operation(
@@ -60,6 +69,7 @@ public class TodoController {
         TodoDto todo = todoService.getTodoById(id);
 
         return new ResponseEntity<>(todo, HttpStatus.OK);
+
     }
 
 
