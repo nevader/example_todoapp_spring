@@ -45,6 +45,7 @@ public class TodoController {
     @PostMapping
     public ResponseEntity<?> addTodo(@Valid @RequestBody TodoDto todoDto, BindingResult bindingResult) {
 
+        //Validation
         if (bindingResult.hasErrors()) {
 
             StringBuilder errorMessage = new StringBuilder();
