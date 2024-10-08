@@ -3,6 +3,7 @@ package com.nevader.todo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SpringSecurityConfig {
 
     @Bean
@@ -28,11 +30,11 @@ public class SpringSecurityConfig {
 
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((auth) -> {
-                    auth.requestMatchers(HttpMethod.DELETE, "/api/todo/**").hasRole("ADMIN");
+/*                    auth.requestMatchers(HttpMethod.DELETE, "/api/todo/**").hasRole("ADMIN");
                     auth.requestMatchers(HttpMethod.PUT, "/api/todo/**").hasRole("ADMIN");
                     auth.requestMatchers(HttpMethod.POST, "/api/todo/**").hasRole("ADMIN");
                     auth.requestMatchers(HttpMethod.GET, "/api/todo/**").hasAnyRole("ADMIN", "USER");
-                    auth.requestMatchers(HttpMethod.PATCH, "/api/todo/**").hasAnyRole("ADMIN", "USER");
+                    auth.requestMatchers(HttpMethod.PATCH, "/api/todo/**").hasAnyRole("ADMIN", "USER");*/
                     auth.anyRequest().authenticated();
                 });
 
